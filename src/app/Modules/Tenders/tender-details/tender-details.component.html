@@ -1,0 +1,204 @@
+<div class="container mt-4" *ngIf="tenderDetail">
+  <app-record [record]="record"></app-record>
+
+  <!-- header -->
+  <div class="headerDetail">
+    <div class="d-flex align-items-center">
+      <h3 class="fw-semibold">{{ tenderDetail.title }}</h3>
+      <span class="me-4">منذ {{ transformDate(tenderDetail.created_at) }} أيام</span>
+    </div>
+    <div class="d-flex align-items-center">
+      <i class="fa-solid fa-share-nodes"></i>
+      <div class="d-flex align-items-center">
+        <button class="button-no-style" *ngIf="!inWishList()" (click)="addTenderTowhishList(tenderDetail.id)">
+          <i class="fa-regular fa-heart mx-2"></i>
+        </button>
+        <button class="button-no-style" *ngIf="inWishList()" (click)="addTenderTowhishList(tenderDetail.id)">
+          <i class="fa-solid text-danger fa-heart mx-2"></i>
+        </button>
+        <button class="button-no-style" (click)="addTenderTowhishList(tenderDetail.id)">
+          <p class="m-0">اضافة الي المفضلة</p>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- info -->
+  <div class="tenderMaker mt-4">
+    <h5 class="fw-bold">
+      اسم صاحب الصفقة :
+      <span class="fs-6 me-1 fw-normal">{{ tenderDetail.user_name }}</span>
+    </h5>
+    <h5 class="fw-bold">
+      اسم الشركة :
+      <span class="fs-6 me-1 fw-normal">{{ tenderDetail.company_name }}</span>
+    </h5>
+    <h5 class="fw-bold">
+      تخصص المناقصة :
+      @for (item of tenderDetail.categories; track $index) {
+        <span class="fs-6 me-1 fw-normal">{{ item.name }}</span>
+      }
+    </h5>
+  </div>
+
+  <!-- description -->
+
+  <div class="description mt-4">
+    <h4 class="fw-semibold">التفاصيل</h4>
+    <p>{{ tenderDetail.desc }}</p>
+  </div>
+  <!-- moreInfo -->
+  <div class="moreInfo">
+    <h5>
+      قيمة كراسة الشروط:
+      <span class="fs-6 me-2">{{ tenderDetail.tender_specifications_value }}</span>
+    </h5>
+    <h5>
+      قيمة التأمين:
+      <span class="fs-6 me-2">{{ tenderDetail.insurance_value ? tenderDetail.insurance_value : 'غير محدد' }}</span>
+    </h5>
+    <h5>
+      تاريخ الانتهاء:
+      <span class="fs-6 me-2">{{ tenderDetail.expiry_date }}</span>
+    </h5>
+  </div>
+
+  <div class="mt-4 w-100">
+    <!--------------------tender Image  ------------------------------------>
+    <div *ngIf="imageUrl.length">
+      <h4>صور المناقصه</h4>
+      <div class="d-flex flex-wrap">
+        <div *ngFor="let item of imageUrl; let i = index" class="image my-3 mx-3">
+          <div>
+            <div class="media">
+              <img [src]="item.media || item" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex">
+      <!-------------------- tender files ------------------------------------>
+      <div *ngIf="specifications_file" class="mt-4">
+        <h4>ملف المناقصه</h4>
+        <div *ngIf="specifications_file" class="files">
+          <div>
+            <div class="fileType">
+              <img *ngIf="specifications_fileType === 'docx'" src="./assets/image/word.svg" alt="" />
+              <img *ngIf="specifications_fileType === 'pdf'" src="./assets/image/pdf.png" alt="" />
+              <img *ngIf="specifications_fileType === 'txt'" src="./assets/image/txt.png" alt="" />
+            </div>
+            <div class="buttons">
+              <div class="m-1">
+                <input hidden id="specifications_file" (change)="onFileSelected($event, 'file')" type="file" accept=".xlsx,.doc, .docx,.txt,.pdf" />
+              </div>
+              <button type="button" (click)="navigateToDocument(specifications_file)">عرض</button>
+              <label *ngIf="myTender" for="specifications_file">تبديل</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--------------------other tender files ------------------------------------>
+      <div *ngIf="otherfile" class="mt-4 mx-4">
+        <h4>ملفات اخري</h4>
+        <div *ngIf="otherfile" class="files">
+          <div>
+            <div class="fileType">
+              <img *ngIf="otherfileType === 'docx'" src="./assets/image/word.svg" alt="" />
+              <img *ngIf="otherfileType === 'pdf'" src="./assets/image/pdf.png" alt="" />
+              <img *ngIf="otherfileType === 'txt'" src="./assets/image/txt.png" alt="" />
+            </div>
+            <div class="buttons">
+              <div class="m-1">
+                <input hidden id="tender_other_files" (change)="onFileSelected($event, 'other')" type="file" accept=".xlsx,.doc, .docx,.txt,.pdf" />
+              </div>
+              <button type="button" (click)="navigateToDocument(otherfile)">عرض</button>
+              <label *ngIf="myTender" for="tender_other_files">تبديل</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @if (!addOffer) {
+    <button (click)="addOffer = true" type="submit" class="button-bgMain-txtWhite-radius mt-3" style="border: none">تقديم عرض</button>
+  }
+
+  <!-- make offer -->
+  <form #f="ngForm" *ngIf="addOffer">
+    <div class="mt-4">
+      <h4 class="fw-bold">تقديم عرض</h4>
+
+      <div class="tendersInfo">
+        <label for="">ادخل التفاصيل <span class="text-danger">*</span></label>
+        <textarea name="desc" id="desc" cols="30" placeholder="ادخل التفاصيل" ngModel required></textarea>
+        <div class="attachment">
+          <div class="m-1">
+            <input hidden id="Offerfile" (change)="onFileSelected($event, 'Offerfile')" type="file" ngModel name="Offerfile" accept=".xlsx,.doc, .docx,.txt,.pdf" required />
+            <label for="Offerfile"><i class="fa-solid fa-book-open ms-2"></i>اضف ملفات <span *ngIf="!offer_File" class="text-danger">*</span></label>
+          </div>
+          <div class="m-1">
+            <input
+              name="Offerimage"
+              ngModel
+              hidden
+              id="Offerimage"
+              type="file"
+              multiple
+              (change)="onFileSelected($event, 'Offerimage')"
+              accept="image/png, image/gif, image/jpeg,image/webp"
+              required
+            />
+            <label for="Offerimage"><i class="fa-regular fa-image ms-2"></i>اضف صور <span *ngIf="!offer_images.length" class="text-danger">*</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 w-100">
+        <!--------------------tender Image  ------------------------------------>
+        <div *ngIf="OfferImageUrl.length">
+          <div class="d-flex flex-wrap">
+            <div *ngFor="let item of OfferImageUrl; let i = index" class="image my-3 mx-3">
+              <div>
+                <div class="media">
+                  <img [src]="item.media || item" alt="" />
+                </div>
+
+                <div class="deleteButtonCorner">
+                  <button type="button" (click)="OfferImageUrl.splice(i, 1); offer_images.splice(i, 1); offer_images.length ? null : f.form.get('Offerimage')?.reset()">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-------------------- tender files ------------------------------------>
+        <div *ngIf="offerFile" class="mt-4">
+          <div *ngIf="offerFile" class="files">
+            <div>
+              <div class="fileType">
+                <img *ngIf="offerFile_fileType === 'docx'" src="./assets/image/word.svg" alt="" />
+                <img *ngIf="offerFile_fileType === 'pdf'" src="./assets/image/pdf.png" alt="" />
+                <img *ngIf="offerFile_fileType === 'txt'" src="./assets/image/txt.png" alt="" />
+              </div>
+              <div class="buttons">
+                <div class="m-1">
+                  <input hidden id="offerFile" (change)="onFileSelected($event, 'Offerfile')" type="file" accept=".xlsx,.doc, .docx,.txt,.pdf" />
+                </div>
+                <button type="button" (click)="navigateToDocument(offerFile)">عرض</button>
+                <label for="offerFile">تبديل</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button (click)="submitOffer()" [disabled]="!f.valid" type="submit" [class.isDisabled]="!f.valid" class="button-bgMain-txtWhite-radius mt-3" style="border: none">
+      تقديم عرض
+    </button>
+  </form>
+  <div class="mt-5"></div>
+</div>

@@ -1,0 +1,34 @@
+.LayOutBody {
+  position: relative;
+  div {
+    position: fixed;
+    background-color: white;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    i {
+      color: #43cf39;
+      font-size: 40px;
+    }
+  }
+}
+@media (max-width: 700px) {
+  .LayOutBody {
+    div {
+      width: 40px;
+      height: 40px;
+      i {
+        color: #43cf39;
+        font-size: 25px;
+      }
+    }
+  }
+}

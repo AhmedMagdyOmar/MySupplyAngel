@@ -1,0 +1,10 @@
+<div class="record">
+  @for (item of record; track item; let i = $index) {
+    <p [routerLink]="[item.router]" routerLinkActive="activeRoute">
+      {{ item.pageName }}
+    </p>
+    @if (record[i + 1]) {
+      <span class="mx-2"><i class="fa-solid fa-chevron-left"></i></span>
+    }
+  }
+</div>

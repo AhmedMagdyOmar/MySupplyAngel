@@ -1,0 +1,41 @@
+<div class="container">
+  <app-record [record]="record"></app-record>
+  <div class="mt-4">
+    <h5>سجل المناقصات</h5>
+  </div>
+  <app-search-input (searchObj)="handleSearchObj($event)" [searchPlaceHolder]="'ابحث عن صفقة جديدة'"></app-search-input>
+
+  @if (tendersList.length) {
+    @for (
+      item of tendersList
+        | paginate
+          : {
+              itemsPerPage: itemsPerPage,
+              currentPage: currentPage,
+              totalItems: totalItems
+            };
+      track item.id;
+      let i = $index
+    ) {
+      <div class="my-3">
+        <app-info-details
+          [MyTender]="item.is_my_tender"
+          [inWishList]="item.is_favorite"
+          (addToWhishList)="addTenderTowhishList($event)"
+          [details]="item"
+          [router]="'/tenders/' + item.id + '/tender-details'"
+        ></app-info-details>
+      </div>
+    }
+
+    @if (tendersList.length) {
+      <div class="text-center">
+        <pagination-controls class="my-pagination" (pageChange)="handlePagination($event)"></pagination-controls>
+      </div>
+    }
+  } @else {
+    <div class="alert alert-danger mt-4">
+      <p>لا يوجد مناقصات ...</p>
+    </div>
+  }
+</div>

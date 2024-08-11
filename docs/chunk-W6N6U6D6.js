@@ -1,0 +1,1 @@
+import{f as o}from"./chunk-QKFZZ2ZG.js";import{R as r,nc as e,ra as t}from"./chunk-I3BRGV73.js";var l=()=>{let n=r(o),u=r(t);return e(u)&&typeof window<"u"?localStorage.getItem("userToken")!=null?!0:(n.navigate(["/auth"]),!1):!1};export{l as a};

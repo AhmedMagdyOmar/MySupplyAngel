@@ -1,0 +1,90 @@
+@import '../../scss/variables';
+footer {
+  background-color: $MidnightNavy;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    div {
+      width: calc(100% / 3);
+    }
+  }
+}
+.whoWeare {
+  h3 {
+    color: $white;
+  }
+  p {
+    color: $SlateBlue;
+  }
+  .socialMedia {
+    i {
+      color: $main-color;
+      cursor: pointer;
+    }
+  }
+}
+
+.Abbreviations {
+  div {
+    width: fit-content;
+    margin: auto;
+  }
+  h3 {
+    color: $white;
+  }
+  p {
+    color: $SlateBlue;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      color: $SlateBlue;
+      padding: 10px 0;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+  }
+}
+.Subscribe {
+  h3 {
+    color: $white;
+  }
+  p {
+    color: $SlateBlue;
+    margin: 15px 0;
+  }
+  input {
+    background-color: #47556b;
+    border: none;
+    color: $white;
+  }
+  input::placeholder {
+    color: $SilverSage;
+    opacity: 1; /* Firefox */
+  }
+}
+@media (max-width: 1200px) {
+  footer {
+    .container {
+      flex-wrap: wrap;
+
+      div:not(:nth-of-type(3)) {
+        width: 50%;
+        margin-bottom: 20px;
+      }
+      div:nth-of-type(3) {
+        width: 100%;
+      }
+    }
+  }
+}
+@media (max-width: 628px) {
+  footer {
+    .container {
+      div:not(:nth-of-type(3)) {
+        width: 100%;
+      }
+    }
+  }
+}

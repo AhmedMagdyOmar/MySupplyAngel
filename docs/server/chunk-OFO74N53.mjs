@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{k as s}from"./chunk-OOMDIMHK.mjs";var t=function(r){return r.BaseUrl="https://tender.elmuthannaplus.com/api/website",r}(t||{});var n=r=>{if(r.status===202)return s({status:r.status,msg:"Successed"});let e;return r.error instanceof ErrorEvent?e=`An error occurred: ${r?.error?.message??r.message}`:e=`Backend returned code ${r?.status}: ${r?.error?.errorMessage}`,s(e)};export{t as a,n as b};

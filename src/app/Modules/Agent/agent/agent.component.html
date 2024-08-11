@@ -1,0 +1,15 @@
+<div class="container">
+  <app-record [record]="record"></app-record>
+
+  <div class="mt-4 d-flex justify-content-between align-items-center flex-wrap">
+    <h5 class="fw-bold">الوكلاء و الموزعين</h5>
+    @if (userLoginStatus()) {
+      <div class="mt-4">
+        <button class="customBtn ms-2" [routerLink]="['search-agent-or-distrebutor']">ابحث عن وكيل او موزع لمنتجك</button>
+        <button class="BtnNoBackGround" [routerLink]="['add-agent-or-distrebutor']">احصل علي حق الوكالة او التوزيع</button>
+      </div>
+    }
+  </div>
+  <app-tabs-button [tabsArray]="tabsArray"></app-tabs-button>
+  <router-outlet></router-outlet>
+</div>

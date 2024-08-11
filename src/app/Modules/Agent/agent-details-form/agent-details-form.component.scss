@@ -1,0 +1,355 @@
+@import '../../../scss/variables';
+.tenders {
+  padding: 25px 0;
+}
+.formWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.formcontainer {
+  width: 46%;
+}
+
+.tendersInfo {
+  width: 100%;
+  position: relative;
+  input {
+    border: 2px solid $divider;
+    width: 100%;
+    height: 3em;
+    border-radius: 1em 1em 0 0;
+    font-size: 1em;
+    padding: 10px;
+    outline: none;
+  }
+  textarea {
+    border: 2px solid $divider;
+    width: 100%;
+    border-radius: 0 0 1em 1em;
+    font-size: 1em;
+    height: 150px;
+    padding: 10px;
+    resize: none;
+    outline: none;
+  }
+  .attachment {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    bottom: 16px;
+    left: 10px;
+    right: 10px;
+    div {
+      background-color: $ray;
+      padding: 5px 10px;
+      border-radius: 10px;
+      button {
+        margin: 0;
+        white-space: nowrap;
+        border: none;
+      }
+    }
+  }
+}
+@media (max-width: 992px) {
+  .tendersInfo textarea {
+    height: 200px;
+  }
+}
+.inputContainer {
+  width: 100%;
+  display: flex;
+  input {
+    border: 2px solid $divider;
+    width: 100%;
+    height: 3em;
+    font-size: 1em;
+    padding: 12px;
+    outline: none;
+    display: block;
+  }
+  label {
+    color: $MidnightNavy;
+    margin-inline-start: 10px;
+  }
+  div:first-of-type {
+    width: 50%;
+    input {
+      border-radius: 0 1em 1em 0;
+    }
+  }
+  div:nth-of-type(2) {
+    width: 50%;
+    input {
+      border-right: none;
+      border-radius: 1em 0 0 1em;
+    }
+  }
+}
+@media (max-width: 1000px) {
+  .inputContainer {
+    display: block;
+    div:first-of-type {
+      width: 100%;
+      input {
+        border-radius: 1em 1em 1em 1em;
+        margin: 10px 0;
+      }
+    }
+    div:nth-of-type(2) {
+      width: 100%;
+
+      input {
+        border-radius: 1em 1em 1em 1em;
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+.search {
+  position: relative;
+  height: fit-content;
+  .searchInput {
+    background-color: $ray;
+  }
+  i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+.specializeList {
+  height: 500px;
+  overflow-y: scroll;
+  li {
+    padding: 15px 0;
+    cursor: pointer;
+  }
+}
+
+.specializeList::-webkit-scrollbar {
+  display: block;
+  width: 4px;
+}
+
+.specializeList::-webkit-scrollbar-track {
+  background-color: $Darkmuted;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.specializeList::-webkit-scrollbar-thumb {
+  background: $MidnightNavy !important;
+  border-radius: 10px;
+}
+.createButton {
+  width: 40%;
+  background-color: $main-color;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  color: white;
+  margin-top: 40px;
+}
+.horizontalDivider {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .formcontainer {
+    width: 100%;
+    margin: 0 20px;
+  }
+  .horizontalDivider {
+    display: block;
+  }
+  .verticalDivier {
+    display: none;
+  }
+}
+
+.attachFile {
+  background-color: $ray;
+  padding: 5px 10px;
+  border-radius: 10px;
+  p {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.deletIcon {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
+  background-color: $Darkmuted;
+}
+
+.addMoreOtherFile {
+  margin-inline-start: 10px;
+  background-color: $Darkmuted;
+  color: white;
+  padding: 5px 20px;
+  border-radius: 10px;
+}
+
+.files-style {
+  width: 300px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid $Darkmuted;
+  border-radius: 10px;
+  padding: 10px;
+
+  div {
+    width: 290px;
+    height: 148px;
+    border: 1px solid $SilverSage;
+    border-radius: 10px;
+    iframe {
+      margin: auto;
+      width: 284px;
+      object-fit: cover;
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+  .add-files {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 40px;
+    background-color: $main-color;
+    color: white;
+    margin: 3px auto;
+    border-radius: 20px;
+  }
+}
+
+.image {
+  width: 200px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // overflow: hidden;
+  border: 1px solid $ray;
+  padding: 5px;
+  border-radius: 10px;
+  position: relative;
+  .media {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .deleteButton {
+    margin: 3px auto;
+    width: fit-content;
+    button {
+      width: 100px;
+      border-radius: 10px;
+      border: none;
+      color: white;
+      background-color: $main-color;
+      padding: 5px 0;
+    }
+  }
+  .deleteButtonCorner {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    button {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      background-color: $main-color;
+      border: none;
+      color: white;
+    }
+  }
+}
+
+.files {
+  width: 200px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid $ray;
+  padding: 5px;
+  border-radius: 10px;
+  .fileType {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .buttons {
+    width: fit-content;
+    margin: auto;
+    button {
+      width: 80px;
+      height: 30px;
+      border-radius: 10px;
+      color: white;
+      background-color: $main-color;
+      border: none;
+      margin-inline-end: 5px;
+    }
+    label {
+      width: 80px;
+      height: 30px;
+      border-radius: 10px;
+      color: $main-color;
+      background-color: transparent;
+      border: 1px solid $main-color;
+      margin-inline-end: 5px;
+      text-align: center;
+    }
+  }
+}
+
+.image-container {
+  padding: 1em;
+  overflow-x: scroll;
+}
+.image-container::-webkit-scrollbar {
+  display: block;
+  height: 4px;
+}
+
+.image-container::-webkit-scrollbar-track {
+  background-color: $Darkmuted;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.image-container::-webkit-scrollbar-thumb {
+  background: $MidnightNavy !important;
+  border-radius: 10px;
+}

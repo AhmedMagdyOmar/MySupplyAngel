@@ -1,0 +1,18 @@
+<div class="container mt-2">
+  <div class="d-flex">
+    <p class="text-muted">الصفحه الرئيسيه</p>
+    <span class="mx-2">></span>
+    <p>صفقاتي</p>
+    <span class="mx-2">></span>
+    <p>تفاصيل المناقصة</p>
+  </div>
+
+  <div class="mt-4">
+    <h5 class="fw-bold">تفاصيل التصفيات و هوالك الدورية</h5>
+  </div>
+
+  <app-tabs-button [tabsArray]="tabsArray"></app-tabs-button>
+  <div class="mt-2">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,216 @@
+@import '../../../scss/variables';
+
+.headerDetail {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  h3 {
+    color: $dark;
+    font: normal normal 600 29px/55px Cairo;
+  }
+  span {
+    color: $Darkmuted;
+  }
+  .dateDiff {
+    color: $Darkmuted;
+    font: normal normal normal 16px Cairo;
+  }
+  div:nth-of-type(2) {
+    color: $main-color;
+    i {
+      cursor: pointer;
+    }
+    p {
+      cursor: pointer;
+    }
+  }
+}
+@media (max-width: 383px) {
+  .headerDetail {
+    div:first-of-type {
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.description {
+  p {
+    color: $Darkmuted;
+    line-height: 50px;
+    word-spacing: 2px;
+  }
+}
+.moreInfo {
+  span {
+    color: $main-color;
+  }
+}
+
+.tendersInfo {
+  width: 50%;
+  position: relative;
+  input {
+    border: 2px solid $divider;
+    width: 100%;
+    height: 3em;
+    border-radius: 1em 1em 0 0;
+    font-size: 1em;
+    padding: 10px;
+    outline: none;
+  }
+  textarea {
+    // border-top: none;
+    // border-bottom: 2px solid $divider;
+    // border-left: 2px solid $divider;
+    // border-right: 2px solid $divider;
+    border: 2px solid $divider;
+    width: 100%;
+    border-radius: 0 0 1em 1em;
+    font-size: 1em;
+    height: 150px;
+    padding: 10px;
+    resize: none;
+    outline: none;
+  }
+  .attachment {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    bottom: 16px;
+    left: 10px;
+    right: 10px;
+    div {
+      background-color: $ray;
+      padding: 5px 10px;
+      border-radius: 10px;
+      button {
+        margin: 0;
+        white-space: nowrap;
+        border: none;
+      }
+    }
+  }
+}
+@media (max-width: 992px) {
+  .tendersInfo textarea {
+    height: 200px;
+  }
+}
+
+.attachFile {
+  background-color: $ray;
+  padding: 5px 10px;
+  border-radius: 10px;
+  p {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.deletIcon {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
+  background-color: $Darkmuted;
+}
+
+.image {
+  width: 200px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // overflow: hidden;
+  border: 1px solid $ray;
+  padding: 5px;
+  border-radius: 10px;
+  position: relative;
+  .media {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .deleteButton {
+    margin: 3px auto;
+    width: fit-content;
+    button {
+      width: 100px;
+      border-radius: 10px;
+      border: none;
+      color: white;
+      background-color: $main-color;
+      padding: 5px 0;
+    }
+  }
+  .deleteButtonCorner {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    button {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      background-color: $main-color;
+      border: none;
+      color: white;
+    }
+  }
+}
+
+.files {
+  width: 200px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid $ray;
+  padding: 5px;
+  border-radius: 10px;
+  .fileType {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .buttons {
+    width: fit-content;
+    margin: auto;
+    button {
+      width: 80px;
+      height: 30px;
+      border-radius: 10px;
+      color: white;
+      background-color: $main-color;
+      border: none;
+      margin-inline-end: 5px;
+    }
+    label {
+      width: 80px;
+      height: 30px;
+      border-radius: 10px;
+      color: $main-color;
+      background-color: transparent;
+      border: 1px solid $main-color;
+      margin-inline-end: 5px;
+      text-align: center;
+    }
+  }
+}

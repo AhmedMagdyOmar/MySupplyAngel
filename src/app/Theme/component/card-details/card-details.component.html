@@ -1,0 +1,73 @@
+<div class="details">
+  <div class="pe-3 w-100 detailsWrapper">
+    <div class="detailsTitle">
+      <div class="mb-1">
+        <h3 class="mb-0">
+          {{ details().title }}
+          @if (navigateOpen()) {
+            <button class="button-no-style" (click)="navigate()">
+              <span><i class="fa-solid fa-eye shareButton"></i></span>
+            </button>
+          }
+        </h3>
+        <p style="margin-top: -13px" class="dateDiff">منذ {{ transformDate(details().created_at) }} أيام</p>
+      </div>
+    </div>
+    <div class="handleDetails">
+      <div style="overflow-wrap: break-word" class="w-100">
+        <p>{{ details().desc }}</p>
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+          <div>
+            <p class="fw-bold m-0">
+              تاريخ الانتهاء :
+              <span class="value">{{ details().expiry_date }}</span>
+            </p>
+          </div>
+          <div class="d-flex align-items-center controls">
+            <button class="button-no-style" (click)="openShare = !openShare">
+              <i style="cursor: pointer" class="fa-solid fa-share-nodes shareBox" style="cursor: pointer">
+                <section class="share-content" *ngIf="openShare">
+                  <button class="button-no-style" (click)="shareThisCard('twitter')">
+                    <i class="fa-brands fa-twitter"></i>
+                  </button>
+                  <button class="button-no-style" (click)="shareThisCard('facbook')">
+                    <i class="fa-brands fa-facebook"></i>
+                  </button>
+                  <button class="button-no-style" (click)="shareThisCard('whatsapp')">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </button>
+                </section>
+              </i>
+            </button>
+            <div class="d-flex align-items-center">
+              <button class="button-no-style" *ngIf="!inWishList()" (click)="handleWhishlist()">
+                <i style="cursor: pointer" class="fa-regular fa-heart mx-2"></i>
+              </button>
+              <button class="button-no-style" *ngIf="inWishList()" (click)="handleWhishlist()">
+                <i style="cursor: pointer" class="fa-solid text-danger fa-heart mx-2"></i>
+              </button>
+              <button class="button-no-style" (click)="handleWhishlist()">
+                <p style="white-space: nowrap" class="m-0">اضافة الي المفضلة</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    @if (addOffer()) {
+      <div class="my-3">
+        <button class="button-bgMain-txtWhite-radius" [routerLink]="[router()]">تقديم عرض</button>
+      </div>
+    }
+  </div>
+  <div
+    class="tags"
+    [ngStyle]="{
+      'background-color': details().agent_type === 'distrebutor' ? '#7F5283' : '#0078AA'
+    }"
+  >
+    <p class="m-0">
+      {{ details().agent_type === 'distrebutor' ? 'توزيع' : 'وكالة' }}
+    </p>
+  </div>
+</div>

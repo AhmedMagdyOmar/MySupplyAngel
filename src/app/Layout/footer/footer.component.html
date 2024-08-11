@@ -1,0 +1,42 @@
+<footer class="mt-5">
+  <div class="container py-5">
+    <div class="whoWeare">
+      <h3>من نحن</h3>
+      <p>{{ aboutContent }}</p>
+      <button class="button-bwhite-txtMain-radius my-4" (click)="shareOnwhatsApp()"><i class="fa-brands mx-2 text-success fa-whatsapp"></i>كن شريكا لنا في بلدك</button>
+      <h3 class="my-4">تابعنا</h3>
+      <div class="socialMedia">
+        <button class="button-no-style" (click)="navigateToUrl('twitter')">
+          <i class="fa-brands fa-twitter"></i>
+        </button>
+        <button class="button-no-style mx-3" (click)="navigateToUrl('linkedin')">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </button>
+        <button class="button-no-style" (click)="navigateToUrl('facebook')">
+          <i class="fa-brands fa-facebook-f"></i>
+        </button>
+      </div>
+    </div>
+    <div class="Abbreviations">
+      <div>
+        <h3>اختصارات</h3>
+        <ul>
+          <li [routerLink]="['/categories']">القطاعات</li>
+          <li [routerLink]="['/tenders/all-tenders']">سجل المناقصات</li>
+          <li [routerLink]="['/agent/require-agent']">الوكلاء و الموزعين</li>
+          <li [routerLink]="['/myDeals/my-tenders']">صفقاتي</li>
+          <li [routerLink]="['/acccount-info']">معلومات الحساب و سابقة الاعمال</li>
+          <li [routerLink]="['/favorite/wishList/wishListTender']">المفضلة</li>
+          <li [routerLink]="['/pricePlans']">خطط الاسعار</li>
+          <li [routerLink]="['/contactUs']">اتصل بنا</li>
+        </ul>
+      </div>
+    </div>
+    <div class="Subscribe">
+      <h3>اشترك في قائمة البريد</h3>
+      <p>لمعرفة اخر الاخبار و العروض اشترك في خدمة البريد</p>
+      <input type="email" class="form-control" placeholder="برجاء ادخال البريد الالكتروني" />
+      <button class="button-bwhite-txtMain-radius mt-4">اشترك</button>
+    </div>
+  </div>
+</footer>

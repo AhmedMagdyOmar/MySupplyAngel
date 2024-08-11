@@ -1,0 +1,35 @@
+<div class="container">
+  <select (change)="getMyagent()" name="" id="" [(ngModel)]="filter">
+    <option selected value="MyTenders">طلباتي</option>
+    <option value="myOffers">عروض اسعاري</option>
+  </select>
+  <div class="row g-5 mt-4">
+    @for (
+      item of agentList
+        | paginate
+          : {
+              itemsPerPage: itemsPerPage,
+              currentPage: currentPage,
+              totalItems: totalItems
+            };
+      track item.id;
+      let i = $index
+    ) {
+      <div class="col-lg-6" style="cursor: pointer">
+        <app-card-details
+          [inWishList]="item.is_favorite"
+          [details]="item"
+          (addToWhishList)="addAgentTowhishList($event)"
+          [addOffer]="false"
+          [navigateOpen]="true"
+          (navigateToUpdate)="agentControl(item.id)"
+        ></app-card-details>
+      </div>
+    }
+    @if (agentList.length) {
+      <div class="text-center">
+        <pagination-controls class="my-pagination" (pageChange)="handlePagination($event)"></pagination-controls>
+      </div>
+    }
+  </div>
+</div>

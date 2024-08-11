@@ -1,0 +1,9 @@
+@import '../../scss/variables';
+.hyperlinkBUtton {
+  color: $main-color;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: large;
+}

@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="d-flex mb-4 mt-4">
+    <app-record [record]="record"></app-record>
+  </div>
+  <div class="my-4">
+    <h5>{{ categoryObject?.name }}</h5>
+  </div>
+
+  <app-search-input [searchPlaceHolder]="'ابحث عن قطاع'" (searchObj)="handleSearchObj($event)"></app-search-input>
+
+  @if (tendersList.length) {
+    @for (
+      item of tendersList
+        | paginate
+          : {
+              itemsPerPage: itemsPerPage,
+              currentPage: currentPage,
+              totalItems: totalItems
+            };
+      track item.id;
+      let i = $index
+    ) {
+      <div class="my-3">
+        <app-info-details
+          [inWishList]="item.is_favorite"
+          (addToWhishList)="addTenderTowhishList($event)"
+          [details]="item"
+          [router]="'/tenders/' + item.id + '/tender-details'"
+        ></app-info-details>
+      </div>
+    }
+
+    <div class="text-center">
+      <pagination-controls class="my-pagination" (pageChange)="handlePagination($event)"></pagination-controls>
+    </div>
+  }
+
+  @if (dataNotFound) {
+    <div class="alert alert-info mt-4">
+      <h4>لا يوجد منقاصات لهذا القطاع</h4>
+    </div>
+  }
+</div>

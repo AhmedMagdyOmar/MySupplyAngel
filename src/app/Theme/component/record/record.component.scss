@@ -1,0 +1,19 @@
+@import '../../../scss/variables';
+.record {
+  display: flex;
+  margin: 1em 0;
+  align-items: center;
+}
+p {
+  color: $Darkmuted;
+  transition: 0.3s;
+  margin: 0;
+  cursor: pointer;
+  &:hover {
+    color: black;
+  }
+}
+
+.activeRoute {
+  color: black;
+}

@@ -1,0 +1,18 @@
+@import '../../scss/variables';
+.WhyUs {
+  margin-top: 1.25em;
+  padding: 50px 0;
+}
+.pageTitle {
+  color: $dark;
+  font-weight: bold;
+}
+.tips {
+  li {
+    margin: 20px 0;
+  }
+}
+
+li::marker {
+  color: $DeepOceanBlue;
+}

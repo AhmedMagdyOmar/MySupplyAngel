@@ -1,0 +1,221 @@
+<div class="container">
+  <form [formGroup]="agentForm" (ngSubmit)="submitForm()">
+    <div class="tenders">
+      <div style="width: 100%; padding-inline-end: 20px">
+        <div class="d-md-flex justify-content-between">
+          <div class="formcontainer formWrapper">
+            <div class="tendersInfo my-3">
+              <label for="">عنوان الصفقة<span *ngIf="agentForm.get('title')?.errors" class="text-danger">*</span></label>
+              <input formControlName="title" type="text" name="title" class="Invalid" placeholder="عنوان الصفقة" />
+            </div>
+
+            <div class="inputContainer mt-3">
+              <div>
+                <label for="company_name">ادخل اسم الشركة <span *ngIf="agentForm.get('company_name')?.errors" class="text-danger">*</span></label>
+                <input id="company_name" type="text" placeholder="قيمة التأمين" formControlName="company_name" />
+              </div>
+              <div>
+                <label for="expiry_date">ادخل تاريخ الانتهاء <span *ngIf="agentForm.get('expiry_date')?.errors" class="text-danger">*</span></label>
+                <input class="text-end" (change)="validateDateRange($event)" id="expiry_date" type="date" placeholder="تاريخ الانتهاء" formControlName="expiry_date" />
+              </div>
+            </div>
+
+            <div class="tendersInfo mt-3">
+              <label for="">ادخل التفاصيل <span *ngIf="agentForm.get('desc')?.errors" class="text-danger">*</span></label>
+              <textarea formControlName="desc" name="desc" id="desc" cols="30" placeholder="ادخل التفاصيل"></textarea>
+              <div class="attachment">
+                <div class="m-1" *ngIf="myTender">
+                  <input hidden id="tender_images" type="file" multiple (change)="onFileSelected($event, 'image')" accept="image/png, image/gif, image/jpeg,image/webp" />
+                  <label for="tender_images"><i class="fa-regular fa-image ms-2"></i>اضف صور <span *ngIf="!tender_images" class="text-danger">*</span></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="attachmentFiles w-100 mt-5">
+              <!-------------------------------- media ----------------------------------------------->
+              <div class="mt-4 w-100">
+                <!--------------------tender Image  ------------------------------------>
+                <div *ngIf="imageUrl.length">
+                  <h4>صور المناقصه</h4>
+                  <div class="d-flex justify-content-between image-container">
+                    <div *ngFor="let item of imageUrl; let i = index" class="image mx-3">
+                      <div>
+                        <div class="media">
+                          <img [src]="item.media || item" alt="" />
+                        </div>
+
+                        <div class="deleteButtonCorner" *ngIf="myTender">
+                          <button type="button" (click)="imageUrl.splice(i, 1); tender_images.splice(i, 1)">
+                            <i class="fa-solid fa-xmark"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-------------------- tender files ------------------------------------>
+                <div *ngIf="specifications_file" class="mt-4">
+                  <h4>ملف المناقصه</h4>
+                  <div *ngIf="specifications_file" class="files">
+                    <div>
+                      <div class="fileType">
+                        <img *ngIf="specifications_fileType === 'docx'" src="./assets/image/word.svg" alt="" />
+                        <img *ngIf="specifications_fileType === 'pdf'" src="./assets/image/pdf.png" alt="" />
+                        <img *ngIf="specifications_fileType === 'txt'" src="./assets/image/txt.png" alt="" />
+                      </div>
+                      <div class="buttons">
+                        <div class="m-1">
+                          <input hidden id="specifications_file" (change)="onFileSelected($event, 'file')" type="file" accept=".xlsx,.doc, .docx,.txt,.pdf" />
+                        </div>
+                        <button type="button" (click)="navigateToDocument(specifications_file)">تحميل</button>
+                        <label *ngIf="myTender" for="specifications_file">تبديل</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--------------------other tender files ------------------------------------>
+                <div *ngIf="otherfile" class="mt-4">
+                  <h4>ملفات اخري</h4>
+                  <div *ngIf="otherfile" class="files">
+                    <div>
+                      <div class="fileType">
+                        <img *ngIf="otherfileType === 'docx'" src="./assets/image/word.svg" alt="" />
+                        <img *ngIf="otherfileType === 'pdf'" src="./assets/image/pdf.png" alt="" />
+                        <img *ngIf="otherfileType === 'txt'" src="./assets/image/txt.png" alt="" />
+                      </div>
+                      <div class="buttons">
+                        <div class="m-1">
+                          <input hidden id="tender_other_files" (change)="onFileSelected($event, 'other')" type="file" accept=".xlsx,.doc, .docx,.txt,.pdf" />
+                        </div>
+                        <button type="button" (click)="navigateToDocument(otherfile)">تحميل</button>
+                        <label *ngIf="myTender" for="tender_other_files">تبديل</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- my offer start-->
+
+            <div class="mt-4 w-100" *ngIf="!canAddOffer">
+              <h3>عرضي</h3>
+
+              <form [formGroup]="offerForm" action="" (ngSubmit)="offerFormSubmit()">
+                <div class="tendersInfo mt-3">
+                  <label for="">ادخل التفاصيل <span *ngIf="offerForm.get('desc')?.errors" class="text-danger">*</span></label>
+                  <textarea formControlName="desc" name="desc" id="desc" cols="30" placeholder="ادخل التفاصيل"></textarea>
+                  <div class="attachment">
+                    <!-- <div class="m-1" >
+                        <input
+                          
+                          hidden
+                          id="offer_images"
+                          type="file"
+                          multiple
+                          (change)="onFileSelected($event,'Offerimage')"
+                          accept="image/png, image/gif, image/jpeg,image/webp"
+                        />
+                        <label for="offer_images"
+                          ><i class="fa-regular fa-image ms-2"></i>اضف صور
+                          <span  *ngIf="!offer_images" class="text-danger">*</span></label
+                        >
+                      </div> -->
+                  </div>
+                </div>
+
+                <div class="mt-4 w-100">
+                  <!--------------------tender Image  ------------------------------------>
+                  <div *ngIf="OfferImageUrl.length">
+                    <div class="d-flex justify-content-between image-container">
+                      <div *ngFor="let item of OfferImageUrl; let i = index" class="image mx-3">
+                        <div>
+                          <div class="media">
+                            <img [src]="item.media || item" alt="" />
+                          </div>
+
+                          <div class="deleteButtonCorner">
+                            <!-- <button
+                                type="button"
+                                (click)="
+                                  OfferImageUrl.splice(i, 1); offer_images.splice(i, 1)
+                                "
+                              >
+                              <i class="fa-solid fa-xmark"></i>
+                              </button> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-------------------- tender files ------------------------------------>
+                  <div *ngIf="offerFile" class="mt-4">
+                    <div *ngIf="offerFile" class="files">
+                      <div>
+                        <div class="fileType">
+                          <img *ngIf="offerFile_fileType === 'docx'" src="./assets/image/word.svg" alt="" />
+                          <img *ngIf="offerFile_fileType === 'pdf'" src="./assets/image/pdf.png" alt="" />
+                          <img *ngIf="offerFile_fileType === 'txt'" src="./assets/image/txt.png" alt="" />
+                        </div>
+                        <div class="buttons">
+                          <div class="m-1">
+                            <!-- <input
+                                hidden
+                                id="offerFile"
+                                (change)="onFileSelected($event,'Offerfile')"
+                                type="file"
+                                accept=".xlsx,.doc, .docx,.txt,.pdf"
+                              /> -->
+                          </div>
+                          <button type="button" (click)="navigateToDocument(offerFile)">عرض</button>
+                          <!-- <label  for="offerFile"
+                                >تبديل</label> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="createButton btn" type="submit" [disabled]="!offerImageChange && !offerFileChange">حفظ</button>
+              </form>
+            </div>
+
+            <!-- my offer end -->
+          </div>
+          <div class="verticalDivier"></div>
+          <div class="horizontalDivider my-5"></div>
+          <div class="formcontainer">
+            <h3>التخصص<span *ngIf="!category().length" class="text-danger">*</span></h3>
+            <div class="search">
+              <input type="text" class="searchInput px-5 form-control" placeholder="بحث" (keyup)="categroySearch($event)" />
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="mt-3">
+              @for (categ of category(); track categ.id; let i = $index) {
+                <app-button-with-close-icon [addText]="categ.name" (click)="myTender ? removeCategoryFromlist(i) : ''"></app-button-with-close-icon>
+              }
+            </div>
+            <div class="mt-4">
+              <ul class="list-unstyled px-0 specializeList">
+                @for (categoryList of categoryList | categorySearch: categorySearchKeyword; track categoryList.id; let i = $index) {
+                  <li>
+                    <button class="button-no-style" (click)="myTender ? handleCategoryList(categoryList) : ''">
+                      {{ categoryList.name }}
+                    </button>
+                  </li>
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          @if (inValidForm) {
+            <p class="alert alert-danger mt-3">{{ errorMassage }}</p>
+          }
+          <button *ngIf="myTender" class="createButton btn" type="submit" [disabled]="!agentForm.valid">حفظ</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

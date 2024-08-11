@@ -1,0 +1,16 @@
+<div class="container">
+  <app-record [record]="record"></app-record>
+  <div>
+    <h4 class="fw-bold">الاشعارات</h4>
+
+    <div class="mt-4">
+      @for (item of notification; track item.id; let index = $index) {
+        <p>
+          <span *ngIf="!item.body.change_status">{{ item.body }}</span>
+          <span *ngIf="item.body.change_status">{{ item.body.change_status }}</span>
+        </p>
+        <div *ngIf="notification[index + 1]" class="horizontalDivider"></div>
+      }
+    </div>
+  </div>
+</div>

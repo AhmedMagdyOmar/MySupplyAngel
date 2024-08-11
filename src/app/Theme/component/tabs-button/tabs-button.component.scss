@@ -1,0 +1,25 @@
+@import '../../../scss/variables';
+
+ul {
+  list-style: none;
+  display: flex;
+  li {
+    margin: 10px 1em;
+  }
+}
+
+.inActiveButton {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: transparent;
+  color: $Darkmuted;
+}
+
+.ActiveButton {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: $main-color;
+  color: white;
+}

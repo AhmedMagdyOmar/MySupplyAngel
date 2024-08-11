@@ -1,0 +1,45 @@
+<div class="container">
+  <app-record [record]="record"></app-record>
+  <div class="mt-4 d-flex justify-content-between align-items-center flex-wrap">
+    <h5>تصفيات و هوالك دورية</h5>
+    @if (userLoginStatus()) {
+      <div>
+        <button class="customBtn ms-2" [routerLink]="['../add-liquidation-item']">اضف تصفيات</button>
+        <button class="BtnNoBackGround" [routerLink]="['../add-expire-item']">اضف هوالك دورية</button>
+      </div>
+    }
+  </div>
+  <app-search-input (searchObj)="handleSearchObj($event)" [searchPlaceHolder]="'ابحث عن صفقة جديدة'"></app-search-input>
+
+  @if (expireList.length) {
+    @for (
+      item of expireList
+        | paginate
+          : {
+              itemsPerPage: itemsPerPage,
+              currentPage: currentPage,
+              totalItems: totalItems
+            };
+      track item.id;
+      let i = $index
+    ) {
+      <div class="my-3">
+        <app-essential-details
+          [inWishList]="item.is_favorite"
+          [details]="item"
+          (addToWhishList)="addexpireTowhishList($event)"
+          [router]="'/expiration/' + item.id + '/details'"
+        ></app-essential-details>
+      </div>
+    }
+    @if (expireList.length) {
+      <div class="text-center">
+        <pagination-controls class="my-pagination" (pageChange)="handlePagination($event)"></pagination-controls>
+      </div>
+    }
+  } @else {
+    <div class="alert alert-danger mt-4">
+      <p>لا يوجد تصفيات ...</p>
+    </div>
+  }
+</div>

@@ -1,0 +1,11 @@
+@if (!hasoffer) {
+  <div class="w-100 d-flex justify-content-center Abbreviations">لا يوجد عروض ...</div>
+}
+
+@if (hasoffer) {
+  @for (offer of offers; track offer.id) {
+    <div class="my-3">
+      <app-offer-card [offer]="offer"></app-offer-card>
+    </div>
+  }
+}

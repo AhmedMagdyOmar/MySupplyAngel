@@ -1,0 +1,17 @@
+@import '../../../scss/variables';
+.customBtn {
+  height: 40px;
+  padding: 0 20px;
+  background-color: $main-color;
+  border-radius: 20px;
+  border: none;
+  color: white;
+}
+.BtnNoBackGround {
+  height: 40px;
+  padding: 0 20px;
+  background-color: transparent;
+  border-radius: 20px;
+  border: 2px solid $main-color;
+  color: $main-color;
+}

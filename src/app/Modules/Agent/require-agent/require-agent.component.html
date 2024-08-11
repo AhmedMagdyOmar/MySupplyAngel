@@ -1,0 +1,39 @@
+<div class="container">
+  <app-search-input (searchObj)="handleSearchObj($event)" [searchPlaceHolder]="'ابحث عن صفقة جديدة'"></app-search-input>
+
+  <div class="row g-5 mt-4">
+    @if (agentList.length) {
+      @for (
+        item of agentList
+          | paginate
+            : {
+                itemsPerPage: itemsPerPage,
+                currentPage: currentPage,
+                totalItems: totalItems
+              };
+        track item.id;
+        let i = $index
+      ) {
+        <div class="col-lg-6">
+          <app-card-details
+            [addOffer]="!item.is_my_agent"
+            [inWishList]="item.is_favorite"
+            [details]="item"
+            (addToWhishList)="addAgentTowhishList($event)"
+            [router]="'/agent/' + item.id + '/agent-details'"
+          ></app-card-details>
+        </div>
+      }
+    }
+
+    @if (agentList.length) {
+      <div class="text-center">
+        <pagination-controls class="my-pagination" (pageChange)="handlePagination($event)"></pagination-controls>
+      </div>
+    } @else {
+      <div class="alert-danger alert">
+        <p>لا يوجد</p>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div>
+  <ul>
+    @for (item of tabsArray(); track $index) {
+      <li>
+        <button class="inActiveButton" [routerLink]="[item.link]" routerLinkActive="ActiveButton">
+          {{ item.name }}
+        </button>
+      </li>
+    }
+  </ul>
+</div>

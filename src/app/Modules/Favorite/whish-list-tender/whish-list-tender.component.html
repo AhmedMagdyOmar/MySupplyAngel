@@ -1,0 +1,27 @@
+<div class="container">
+  @for (
+    item of tendersList
+      | paginate
+        : {
+            itemsPerPage: itemsPerPage,
+            currentPage: currentPage,
+            totalItems: totalItems
+          };
+    track item.id;
+    let i = $index
+  ) {
+    <div class="my-3">
+      <app-info-details
+        [inWishList]="true"
+        [router]="'/tenders/' + item.id + '/tender-details'"
+        (addToWhishList)="addTenderTowhishList($event)"
+        [details]="item"
+      ></app-info-details>
+    </div>
+  }
+  @if (tendersList.length) {
+    <div class="text-center">
+      <pagination-controls class="my-pagination" (pageChange)="handlePagination($event)"></pagination-controls>
+    </div>
+  }
+</div>

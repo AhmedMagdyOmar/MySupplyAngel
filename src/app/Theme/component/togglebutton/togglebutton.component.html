@@ -1,0 +1,22 @@
+<div class="toggleContainer">
+  <div class="text">
+    <p class="m-0">{{ label }}</p>
+  </div>
+  <button
+    class="toggle-button"
+    [ngStyle]="{
+      'background-color': condition ? 'rgba(40, 190, 137, 0.5)' : '#c9cbd5'
+    }"
+    (click)="changeCodition()"
+    style="cursor: pointer"
+  >
+    <div
+      [ngStyle]="{
+        'background-color': condition ? '#28be89' : '#9ca0b0',
+        'margin-left': condition ? 'auto' : '',
+        'margin-right': !condition ? 'auto' : ''
+      }"
+      class="Oval"
+    ></div>
+  </button>
+</div>

@@ -1,0 +1,32 @@
+<div class="our-offers">
+  <div>
+    <h5>الاسم: {{ offer.user.name }}</h5>
+    <P>رقم الهاتف : {{ offer.user.phone }} {{ offer.user.phone_code }} </P>
+    <P>ملحوظة : {{ offer.desc }}</P>
+  </div>
+  <div class="tenderFiles">
+    <div class="image ms-4">
+      <div>
+        <div class="media">
+          <img [src]="offer.images[0].media" alt="" />
+        </div>
+        <div class="deleteButton">
+          <button type="button" (click)="navigateToDocument(offer.images[0].media)">عرض</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="offer.files[0].media" class="files">
+      <div>
+        <div class="fileType">
+          <img *ngIf="handlefileType(offer.files[0].media) === 'docx'" src="./assets/image/word.svg" alt="" />
+          <img *ngIf="handlefileType(offer.files[0].media) === 'pdf'" src="./assets/image/pdf.png" alt="" />
+          <img *ngIf="handlefileType(offer.files[0].media) === 'txt'" src="./assets/image/txt.png" alt="" />
+        </div>
+        <div class="buttons">
+          <button type="button" (click)="navigateToDocument(offer.files[0].media)">عرض</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

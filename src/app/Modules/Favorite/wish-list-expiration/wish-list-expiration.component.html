@@ -1,0 +1,22 @@
+<div class="container">
+  @for (
+    item of expireList
+      | paginate
+        : {
+            itemsPerPage: itemsPerPage,
+            currentPage: currentPage,
+            totalItems: totalItems
+          };
+    track item.id;
+    let i = $index
+  ) {
+    <div class="my-3">
+      <app-essential-details [inWishList]="true" [details]="item" (addToWhishList)="addexpireTowhishList($event)"></app-essential-details>
+    </div>
+  }
+  @if (expireList.length) {
+    <div class="text-center">
+      <pagination-controls class="my-pagination" (pageChange)="handlePagination($event)"></pagination-controls>
+    </div>
+  }
+</div>

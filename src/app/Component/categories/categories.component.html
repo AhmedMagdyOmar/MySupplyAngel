@@ -1,0 +1,28 @@
+<div class="container">
+  <app-record [record]="record"></app-record>
+
+  <div class="mt-4">
+    <h5>القطاعات</h5>
+  </div>
+
+  <app-search-input [addSelectBox]="false" [searchPlaceHolder]="'ابحث عن قطاع'" (searchObj)="handleSearchObj($event)"></app-search-input>
+
+  <div class="sectors">
+    <div class="mt-4 text-center">
+      <h3 class="headerTitle">القطاعات</h3>
+    </div>
+
+    <div class="mt-4">
+      <h5>سجل المناقصات</h5>
+    </div>
+    @if (categoryList) {
+      <div class="row mt-3">
+        @for (item of categoryList; track item.id; let i = $index) {
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+            <app-image-view [routerLink]="['/categories', item.id, 'tender']" [details]="item"></app-image-view>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

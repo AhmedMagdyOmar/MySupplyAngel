@@ -1,0 +1,95 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'app/scss/variables';
+
+body {
+  font-family: 'Cairo';
+}
+
+.horizontalDivider {
+  width: calc(100% - 20px);
+  height: 1px;
+  margin: 2em auto;
+  background-color: $divider;
+}
+.headerTitle {
+  color: $dark;
+  font-size: 35px;
+  font-weight: 600;
+}
+
+.verticalDivier {
+  width: 1px;
+  margin: 0 10px;
+  background-color: $divider;
+}
+
+.toast-center {
+  left: 0;
+}
+
+// globalbuttons
+@mixin Cusbutton() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  white-space: nowrap;
+  height: 2.2em;
+}
+
+.button-bgMain-txtWhite-radius {
+  @include Cusbutton();
+  color: $white;
+  background-color: $main-color;
+  border-radius: calc(2.2em / 2);
+  border: none;
+}
+
+.button-bwhite-txtMain-radius {
+  @include Cusbutton();
+  font-weight: 500;
+  color: $main-color;
+  background-color: $white;
+  border-radius: calc(2.2em / 2);
+  border: 2px solid white;
+}
+.button-bgtran-txtWhite-border-radius {
+  @include Cusbutton();
+  font-weight: 500;
+  color: $white;
+  background-color: transparent;
+  border-radius: calc(2.2em / 2);
+  border: 2px solid white;
+}
+
+.ngx-pagination {
+  a {
+    text-decoration: none !important;
+    color: $main-color !important;
+  }
+
+  .pagination-next,
+  .pagination-previous {
+    span {
+      display: none;
+    }
+  }
+}
+.ng-image-slider-image {
+  /* Customize image styles */
+  transition: transform 1s ease; /* Example transition */
+}
+
+.isDisabled {
+  background-color: #648dc487 !important;
+}
+.button-no-style {
+  color: $main-color;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  i,
+  p {
+    color: $main-color;
+  }
+}

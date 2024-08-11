@@ -1,0 +1,44 @@
+@import '../../scss/variables';
+.SubscribeContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.SubscribePlan {
+  width: 250px;
+  height: 500px;
+  padding: 2em;
+  text-align: center;
+  border: 2px solid $main-color;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px;
+  .content {
+    h3 {
+      font-weight: bold;
+    }
+    p {
+    }
+  }
+  .SubscribeButton {
+    color: white;
+    height: 40px;
+    background-color: $main-color;
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .SubscribeContainer {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 800px) {
+  .SubscribeContainer {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,59 @@
+<div class="container py-5">
+  @if (chosenPlan) {
+    <button (click)="chosenPlan = undefined" class="btn btn-outline-dark">رجوع</button>
+  }
+
+  @if (!chosenPlan) {
+    <div class="SubscribeContainer">
+      @for (item of subscribePlans; track $index) {
+        <div class="SubscribePlan">
+          <div class="content">
+            <h3>{{ item.title }}</h3>
+            <p class="my-3">لمدة {{ item.duration_by_month }} شهر</p>
+
+            <p class="mt-4">{{ item.desc }}</p>
+
+            <p class="my-3">{{ item.price }}ج.م</p>
+            <p class="my-3">{{ item.note }}</p>
+          </div>
+
+          <button (click)="getThisPlan(item.id)" class="SubscribeButton">اشترك الان <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      }
+    </div>
+  }
+</div>
+@if (chosenPlan) {
+  <div class="container d-flex justify-content-between flex-wrap">
+    <div>
+      <div class="d-flex mb-4">
+        <p class="text-muted">الصفحه الرئيسيه</p>
+        <span class="mx-2">></span>
+        <p>خطط الاسعار</p>
+        <span class="mx-2">></span>
+        <p>الاشتراك</p>
+      </div>
+
+      <h3>الاشتراك في {{ chosenPlan.title }}</h3>
+
+      <div class="pay-way">
+        <p>اختار طريقة الدفع</p>
+        <label for="creditCard"><input disabled id="creditCard" class="mx-3" type="radio" name="payWay" /> بطاقة بنكية</label>
+        <label for="fawry" class="mx-3"><input disabled id="fawry" type="radio" class="mx-3" name="payWay" />فوري</label>
+        <label for="vodafoneCash"><input [(ngModel)]="payWay" id="vodafoneCash" type="radio" class="mx-3" name="payWay" value="vodafoneCash" />فودافون كاش</label>
+      </div>
+    </div>
+
+    <div class="SubscribePlan">
+      <div class="content">
+        <h3>{{ chosenPlan.title }}</h3>
+        <p class="my-3">لمدة {{ chosenPlan.duration_by_month }} شهر</p>
+
+        <p class="mt-4">{{ chosenPlan.desc }}</p>
+
+        <p class="my-3">{{ chosenPlan.price }}ج.م</p>
+        <p class="my-3">{{ chosenPlan.note }}</p>
+      </div>
+    </div>
+  </div>
+}

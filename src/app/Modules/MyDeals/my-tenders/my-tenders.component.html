@@ -1,0 +1,26 @@
+<div class="container">
+  <select (change)="getMytender()" name="" id="" [(ngModel)]="filter">
+    <option selected value="MyTenders">طلباتي</option>
+    <option value="myOffers">عروض اسعاري</option>
+  </select>
+  @for (
+    item of tendersList
+      | paginate
+        : {
+            itemsPerPage: itemsPerPage,
+            currentPage: currentPage,
+            totalItems: totalItems
+          };
+    track item.id;
+    let i = $index
+  ) {
+    <div class="my-3" style="cursor: pointer">
+      <app-info-details-for-review [cardType]="filter" (navigateToUpdate)="tenderControl(item.id)" [inWishList]="true" [details]="item"></app-info-details-for-review>
+    </div>
+  }
+  @if (tendersList.length && addPagination) {
+    <div class="text-center">
+      <pagination-controls class="my-pagination" (pageChange)="handlePagination($event)"></pagination-controls>
+    </div>
+  }
+</div>

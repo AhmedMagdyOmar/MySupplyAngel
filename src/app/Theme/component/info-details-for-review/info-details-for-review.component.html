@@ -1,0 +1,67 @@
+<div class="details">
+  <div class="imageContainer">
+    <div class="m-auto">
+      <img *ngIf="!details().tender_images[0].media" src="./assets/image/corporate-businessmen-shaking-hands.png" alt="tender" />
+      <img [src]="details().tender_images[0].media" alt="tender" />
+    </div>
+  </div>
+  <div class="pe-3 w-100 detailsWrapper">
+    <div class="detailsTitle">
+      <div class="mb-3">
+        <h3 class="mb-0">
+          {{ details().title }}
+          <button class="button-no-style" (click)="navigate()">
+            <span><i class="fa-solid fa-eye shareButton"></i></span>
+          </button>
+        </h3>
+        <p style="margin-top: -13px" class="dateDiff mb-0">منذ {{ transformDate(details().created_at) }} أيام</p>
+      </div>
+    </div>
+    <div class="handleDetails">
+      <div>
+        <p>{{ details().desc }}</p>
+      </div>
+      <div>
+        <p>
+          قيمة كراسة الشروط :
+          <span class="value">{{ details().tender_specifications_value }}</span>
+        </p>
+        <p>
+          قيمة التأمين :
+          <span class="value">{{ details().insurance_value }}</span>
+        </p>
+        <p>
+          تاريخ الانتهاء :
+          <span class="value">{{ details().expiry_date }}</span>
+        </p>
+      </div>
+      <div>
+        <button class="button-no-style" (click)="openShare = !openShare">
+          <i style="cursor: pointer" class="fa-solid fa-share-nodes shareBox" style="cursor: pointer">
+            <section class="share-content" *ngIf="openShare">
+              <button class="button-no-style" (click)="shareThisCard('twitter')">
+                <i class="fa-brands fa-twitter"></i>
+              </button>
+              <button class="button-no-style" (click)="shareThisCard('facbook')">
+                <i class="fa-brands fa-facebook"></i>
+              </button>
+              <button class="button-no-style" (click)="shareThisCard('whatsapp')">
+                <i class="fa-brands fa-whatsapp"></i>
+              </button>
+            </section>
+          </i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="tags"
+    [ngStyle]="{
+      'background-color': cardType() === 'MyTenders' ? '#6CC4A1' : '#D77FA1'
+    }"
+  >
+    <p class="m-0">
+      {{ cardType() === 'MyTenders' ? 'طلباتي' : 'عروض اسعاري' }}
+    </p>
+  </div>
+</div>

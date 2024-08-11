@@ -1,0 +1,104 @@
+<div *ngIf="dataLoad">
+  <section class="landing">
+    <div>
+      <h2>افضل مكان للمزايدات و المناقصات</h2>
+      <p>يمكنك الحصول علي افضل الصفقات سواء تريد تقديم الخدمه او تريد عرض طلبك</p>
+      <div *ngIf="!isLogin">
+        <p>اشترك معنا الان</p>
+        <button [routerLink]="['/auth/register']" class="button-bwhite-txtMain-radius m-auto">تسجيل عضوية جديدة</button>
+        <div class="d-flex justify-content-center align-items-center mt-4">
+          <p class="m-0 mx-3">لديك حساب بالفعل؟</p>
+          <button [routerLink]="['/auth/login']" class="button-bgtran-txtWhite-border-radius">تسجيل الدخول</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="deals">
+    <div class="container">
+      <app-search-input (searchObj)="handleSearchObj($event)" [searchPlaceHolder]="'ابحث عن صفقة جديدة'"></app-search-input>
+      <div class="mt-4">
+        <h3 class="headerTitle">احدث المناقصات</h3>
+        @for (item of tendersList; track item.id; let i = $index) {
+          <div class="my-3">
+            <app-info-details
+              [router]="'/tenders/' + item.id + '/tender-details'"
+              [MyTender]="item.is_my_tender"
+              [inWishList]="item.is_favorite"
+              (addToWhishList)="addTenderTowhishList($event, i)"
+              [details]="item"
+            ></app-info-details>
+          </div>
+        }
+        <div class="text-start">
+          <button class="hyperlinkBUtton" [routerLink]="['/tenders/all-tenders']">عرض المزيد</button>
+        </div>
+      </div>
+      <div class="horizontalDivider"></div>
+      <div class="sectors">
+        <div class="mt-4 text-center">
+          <h3 class="headerTitle">القطاعات</h3>
+        </div>
+
+        <div class="d-flex flex-wrap">
+          @for (item of categories; track $index) {
+            <div class="m-3">
+              <app-image-view [details]="item" [routerLink]="['/categories', item.id, 'tender']"></app-image-view>
+            </div>
+          }
+        </div>
+        <div class="text-start">
+          <button class="hyperlinkBUtton" [routerLink]="['/categories']">عرض المزيد</button>
+        </div>
+      </div>
+      <div class="horizontalDivider" id="ourServices"></div>
+      <div class="ourServices">
+        <div>
+          <div class="my-3 text-center">
+            <h3 class="headerTitle">خدماتنا</h3>
+            <div class="serviceWrapper">
+              @for (item of services; track $index) {
+                <div class="service">
+                  <div class="serviceIconContainer my-3">
+                    <img [src]="item.avatar" alt="" />
+                  </div>
+                  <div class="text-center">
+                    <h5>{{ item.title }}</h5>
+                    <p>{{ item.desc }}</p>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="horizontalDivider"></div>
+      <!-- ngSkipHydration -->
+      <div class="mt-4 text-center">
+        <h3 class="headerTitle">عملائنا</h3>
+      </div>
+      @if (clients) {
+        <div class="mt-3">
+          <swiper-container
+            loop="true"
+            [navigation]="{
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            }"
+            slides-per-view="4"
+            speed="500"
+            autoplay-delay="1000"
+            autoplay-disable-on-interaction="false"
+          >
+            @for (item of clients; track $index) {
+              <swiper-slide>
+                <div class="slider">
+                  <img [src]="item.avatar" alt="" />
+                </div>
+              </swiper-slide>
+            }
+          </swiper-container>
+        </div>
+      }
+    </div>
+  </section>
+</div>

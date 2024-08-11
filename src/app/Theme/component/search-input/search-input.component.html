@@ -1,0 +1,30 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<form (ngSubmit)="submitSearch(form)" (keyup)="changeSearch(form)" #form="ngForm">
+  <div class="dealSearch mt-5">
+    <div class="search">
+      <input ngModel name="keyword" type="text" class="searchInput px-5 form-control" [placeholder]="searchPlaceHolder()" />
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+    <div class="d-flex">
+      @if (addSelectBox()) {
+        <select ngModel name="category_id" id="">
+          <option value="" disabled selected>القطاعات</option>
+          <option value="" selected>جميع القطاعات</option>
+          @for (item of categoryList; track $index) {
+            <option [value]="item.id">{{ item.name }}</option>
+          }
+        </select>
+        <select ngModel name="country_id" id="">
+          <option value="">كل الدول</option>
+          @for (item of countries; track $index) {
+            <option [value]="item.id">{{ item.short_name }}</option>
+          }
+        </select>
+      }
+
+      <button type="submit" class="sectorsSearch">
+        {{ searchButtonName() }}
+      </button>
+    </div>
+  </div>
+</form>
