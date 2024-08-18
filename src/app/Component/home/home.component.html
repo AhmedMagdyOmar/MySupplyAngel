@@ -85,9 +85,11 @@
               prevEl: '.swiper-button-prev'
             }"
             slides-per-view="4"
+            space-between="10"
             speed="500"
             autoplay-delay="1000"
             autoplay-disable-on-interaction="false"
+            [breakpoints]="breakpoints"
           >
             @for (item of clients; track $index) {
               <swiper-slide>

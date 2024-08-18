@@ -30,6 +30,21 @@ export class HomeComponent implements OnInit, OnDestroy {
   clients: Client[] = []
   searchObj: any
 
+  breakpoints = {
+    425: {
+      slidesPerView: 1
+    },
+    768: {
+      slidesPerView: 2
+    },
+    900: {
+      slidesPerView: 3
+    },
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 20
+    }
+  }
   constructor(
     private HomeService: HomeService,
     private TendersService: TendersService,
